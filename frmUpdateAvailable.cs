@@ -46,7 +46,7 @@ namespace GitHubAutoUpdateTest
                         progressBar1.Value = progressArgs.ProgressPercentage;
                     };
 
-                    var filePath = Environment.CurrentDirectory + "\\GitHubAutoUpdateTest_NEW.exe";
+                    var filePath = Environment.CurrentDirectory + "\\GitHubAutoUpdateTest.exe";
                     await c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/" + UpdateChecker.GetNewVersionFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
 
                     c.DownloadFileCompleted += (senderObj, completedArgs) =>
