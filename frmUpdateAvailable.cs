@@ -39,13 +39,13 @@ namespace GitHubAutoUpdateTest
             {
                 var c = new WebClient();
 
-                var filePath = Path.GetTempPath() + "\\GitHubAutoUpdateTest.exe";
-                await c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v" + VersionChecker.GetNewVersionNumberFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
-
                 c.DownloadProgressChanged += (senderObj, progressArgs) =>
                 {
                     progressBar1.Value = progressArgs.ProgressPercentage;
                 };
+
+                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GitHubAutoUpdateTest.exe");
+                await c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v" + VersionChecker.GetNewVersionNumberFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
 
                 c.DownloadFileCompleted += (senderObj, completedArgs) =>
                 {
@@ -63,7 +63,6 @@ namespace GitHubAutoUpdateTest
                     else
                     {
                         MessageBox.Show("Download complete!");
-                        File.Copy(filePath, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GitHubAutoUpdateTest.exe"), true);
                     }
                     Process.Start(filePath);
 
