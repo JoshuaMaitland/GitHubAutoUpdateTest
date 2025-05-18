@@ -1,15 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GitHubAutoUpdateTest
 {
-    public static class UpdateChecker
+    public static class VersionChecker
     {
-        public static string GetNewVersionFromGithubAPI()
+        /// <summary>
+        /// Gets the latest version number from the GitHub API.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetNewVersionNumberFromGithubAPI()
         {
             var c = new WebClient();
             c.Headers.Add("User-Agent", "GitHubAutoUpdateTest");

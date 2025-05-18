@@ -20,7 +20,7 @@ namespace GitHubAutoUpdateTest
         private void frmMain_Load(object sender, EventArgs e)
         {
             lblCurrentVersion.Text += Application.ProductVersion;
-            if (Application.ProductVersion != UpdateChecker.GetNewVersionFromGithubAPI())
+            if (Application.ProductVersion != VersionChecker.GetNewVersionFromGithubAPI())
             {
                 var updateForm = new frmUpdateAvailable();
                 updateForm.ShowDialog();

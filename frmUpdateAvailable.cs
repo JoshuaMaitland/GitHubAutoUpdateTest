@@ -23,12 +23,12 @@ namespace GitHubAutoUpdateTest
         private void Form1_Load(object sender, EventArgs e)
         {
             lblCurrentVersion.Text += Application.ProductVersion;
-            lblNewVersion.Text += UpdateChecker.GetNewVersionFromGithubAPI();
+            lblNewVersion.Text += VersionChecker.GetNewVersionFromGithubAPI();
         }
 
         private async void btnDownload_Click(object sender, EventArgs e)
         {
-            if (Application.ProductVersion != UpdateChecker.GetNewVersionFromGithubAPI())
+            if (Application.ProductVersion != VersionChecker.GetNewVersionFromGithubAPI())
             {
                 lblCurrentVersion.Visible = false;
                 lblNewVersion.Visible = false;
@@ -47,7 +47,7 @@ namespace GitHubAutoUpdateTest
                     };
 
                     var filePath = Environment.CurrentDirectory + "\\GitHubAutoUpdateTest.exe";
-                    await c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/" + UpdateChecker.GetNewVersionFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
+                    await c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/" + VersionChecker.GetNewVersionFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
 
                     c.DownloadFileCompleted += (senderObj, completedArgs) =>
                     {
