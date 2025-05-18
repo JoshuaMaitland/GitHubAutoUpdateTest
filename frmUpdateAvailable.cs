@@ -28,62 +28,58 @@ namespace GitHubAutoUpdateTest
 
         private async void btnDownload_Click(object sender, EventArgs e)
         {
-            if (Application.ProductVersion != VersionChecker.GetNewVersionNumberFromGithubAPI())
+            lblCurrentVersion.Visible = false;
+            lblNewVersion.Visible = false;
+            btnDownload.Visible = false;
+            btnSkip.Visible = false;
+            progressBar1.Visible = true;
+            Text = "Downloading...";
+            label1.Text = "Downloading new version...";
+            try
             {
-                lblCurrentVersion.Visible = false;
-                lblNewVersion.Visible = false;
-                btnDownload.Visible = false;
-                btnSkip.Visible = false;
-                progressBar1.Visible = true;
-                Text = "Downloading...";
-                label1.Text = "Downloading new version...";
-                try
+                var c = new WebClient();
+
+                var filePath = Path.GetTempPath() + "\\GitHubAutoUpdateTest.exe";
+                await c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v" + VersionChecker.GetNewVersionNumberFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
+
+                c.DownloadProgressChanged += (senderObj, progressArgs) =>
                 {
-                    var c = new WebClient();
+                    progressBar1.Value = progressArgs.ProgressPercentage;
+                };
 
-                    c.DownloadProgressChanged += (senderObj, progressArgs) =>
-                    {
-                        progressBar1.Value = progressArgs.ProgressPercentage;
-                    };
-
-                    var filePath = Path.GetTempPath() + "\\GitHubAutoUpdateTest.exe";
-                    await c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v" + VersionChecker.GetNewVersionNumberFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
-
-                    c.DownloadFileCompleted += (senderObj, completedArgs) =>
-                    {
-                        if (completedArgs.Error != null)
-                        {
-                            MessageBox.Show("Error: " + completedArgs.Error.Message);
-                            lblCurrentVersion.Visible = true;
-                            lblNewVersion.Visible = true;
-                            btnDownload.Visible = true;
-                            btnSkip.Visible = true;
-                            progressBar1.Visible = false;
-                            Text = "Update Available";
-                            label1.Text = "A new version is available";
-                        }
-                        else
-                        {
-                            MessageBox.Show("Download complete!");
-                            File.Copy(filePath, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GitHubAutoUpdateTest.exe"), true);
-                            
-                            //Process.Start(filePath);
-
-                            //Process.GetCurrentProcess().Kill();
-                        }
-                    };
-                }
-                catch (Exception ex)
+                c.DownloadFileCompleted += (senderObj, completedArgs) =>
                 {
-                    MessageBox.Show("Error: " + ex.Message);
-                    lblCurrentVersion.Visible = true;
-                    lblNewVersion.Visible = true;
-                    btnDownload.Visible = true;
-                    btnSkip.Visible = true;
-                    progressBar1.Visible = false;
-                    Text = "Update Available";
-                    label1.Text = "A new version is available";
-                }
+                    if (completedArgs.Error != null)
+                    {
+                        MessageBox.Show("Error: " + completedArgs.Error.Message);
+                        lblCurrentVersion.Visible = true;
+                        lblNewVersion.Visible = true;
+                        btnDownload.Visible = true;
+                        btnSkip.Visible = true;
+                        progressBar1.Visible = false;
+                        Text = "Update Available";
+                        label1.Text = "A new version is available";
+                    }
+                    else
+                    {
+                        MessageBox.Show("Download complete!");
+                        File.Copy(filePath, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GitHubAutoUpdateTest.exe"), true);
+                    }
+                    Process.Start(filePath);
+
+                    Process.GetCurrentProcess().Kill();
+                };
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+                lblCurrentVersion.Visible = true;
+                lblNewVersion.Visible = true;
+                btnDownload.Visible = true;
+                btnSkip.Visible = true;
+                progressBar1.Visible = false;
+                Text = "Update Available";
+                label1.Text = "A new version is available";
             }
         }
     }
