@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GitHubAutoUpdateTest
@@ -26,7 +19,7 @@ namespace GitHubAutoUpdateTest
             lblNewVersion.Text += VersionChecker.GetNewVersionNumberFromGithubAPI();
         }
 
-        private async void btnDownload_Click(object sender, EventArgs e)
+        private void btnDownload_Click(object sender, EventArgs e)
         {
             lblCurrentVersion.Visible = false;
             lblNewVersion.Visible = false;
@@ -39,15 +32,15 @@ namespace GitHubAutoUpdateTest
             {
                 var c = new WebClient();
 
-                c.DownloadProgressChanged += (senderObj, progressArgs) =>
+                c.DownloadProgressChanged += (s, progressArgs) =>
                 {
                     progressBar1.Value = progressArgs.ProgressPercentage;
                 };
 
-                var filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GitHubAutoUpdateTest.exe");
-                await c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v" + VersionChecker.GetNewVersionNumberFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
+                var filePath = Path.Combine(Path.GetTempPath(), "GitHubAutoUpdateTest.exe");
+                c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v" + VersionChecker.GetNewVersionNumberFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
 
-                c.DownloadFileCompleted += (senderObj, completedArgs) =>
+                c.DownloadFileCompleted += (s, completedArgs) =>
                 {
                     if (completedArgs.Error != null)
                     {
@@ -63,10 +56,12 @@ namespace GitHubAutoUpdateTest
                     else
                     {
                         MessageBox.Show("Download complete!");
-                    }
-                    Process.Start(filePath);
 
-                    Process.GetCurrentProcess().Kill();
+                        Process.Start(filePath);
+                        // Close the current application
+                        Process.GetCurrentProcess().Kill();
+                    }
+
                 };
             }
             catch (Exception ex)
