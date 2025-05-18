@@ -80,6 +80,7 @@
             // btnSkip
             // 
             this.btnSkip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnSkip.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnSkip.Location = new System.Drawing.Point(117, 76);
             this.btnSkip.Name = "btnSkip";
             this.btnSkip.Size = new System.Drawing.Size(75, 23);
@@ -99,6 +100,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnSkip;
             this.ClientSize = new System.Drawing.Size(204, 111);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnSkip);
@@ -109,6 +111,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "frmUpdateAvailable";
+            this.ShowInTaskbar = false;
             this.Text = "A new version is available";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);

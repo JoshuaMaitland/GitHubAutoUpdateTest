@@ -60,6 +60,7 @@ namespace GitHubAutoUpdateTest
                             btnSkip.Visible = true;
                             progressBar1.Visible = false;
                             Text = "Update Available";
+                            label1.Text = "A new version is available";
                         }
                         else
                         {
@@ -80,6 +81,7 @@ namespace GitHubAutoUpdateTest
                     btnSkip.Visible = true;
                     progressBar1.Visible = false;
                     Text = "Update Available";
+                    label1.Text = "A new version is available";
                 }
             }
         }
