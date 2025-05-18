@@ -23,12 +23,12 @@ namespace GitHubAutoUpdateTest
         private void Form1_Load(object sender, EventArgs e)
         {
             lblCurrentVersion.Text += Application.ProductVersion;
-            lblNewVersion.Text += VersionChecker.GetNewVersionFromGithubAPI();
+            lblNewVersion.Text += VersionChecker.GetNewVersionNumberFromGithubAPI();
         }
 
         private async void btnDownload_Click(object sender, EventArgs e)
         {
-            if (Application.ProductVersion != VersionChecker.GetNewVersionFromGithubAPI())
+            if (Application.ProductVersion != VersionChecker.GetNewVersionNumberFromGithubAPI())
             {
                 lblCurrentVersion.Visible = false;
                 lblNewVersion.Visible = false;
@@ -46,8 +46,8 @@ namespace GitHubAutoUpdateTest
                         progressBar1.Value = progressArgs.ProgressPercentage;
                     };
 
-                    var filePath = Environment.CurrentDirectory + "\\GitHubAutoUpdateTest.exe";
-                    await c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/" + VersionChecker.GetNewVersionFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
+                    var filePath = Path.GetTempPath() + "\\GitHubAutoUpdateTest.exe";
+                    await c.DownloadFileTaskAsync("https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v" + VersionChecker.GetNewVersionNumberFromGithubAPI() + "/GitHubAutoUpdateTest.exe", filePath);
 
                     c.DownloadFileCompleted += (senderObj, completedArgs) =>
                     {
@@ -65,12 +65,13 @@ namespace GitHubAutoUpdateTest
                         else
                         {
                             MessageBox.Show("Download complete!");
+                            File.Copy(filePath, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "GitHubAutoUpdateTest.exe"), true);
+                            
+                            //Process.Start(filePath);
+
+                            //Process.GetCurrentProcess().Kill();
                         }
                     };
-
-                    Process.Start(filePath);
-
-                    Process.GetCurrentProcess().Kill();
                 }
                 catch (Exception ex)
                 {
