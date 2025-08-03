@@ -113,7 +113,7 @@
             this.Name = "frmUpdateAvailable";
             this.ShowInTaskbar = false;
             this.Text = "A new version is available";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Load += new System.EventHandler(this.frmUpdateAvailable_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

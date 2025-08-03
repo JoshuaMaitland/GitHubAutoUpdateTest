@@ -13,7 +13,7 @@ namespace GitHubAutoUpdateTest
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void frmUpdateAvailable_Load(object sender, EventArgs e)
         {
             lblCurrentVersion.Text += Application.ProductVersion;
             lblNewVersion.Text += VersionChecker.GetNewVersionNumberFromGithubAPI();
