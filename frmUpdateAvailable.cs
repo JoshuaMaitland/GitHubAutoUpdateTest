@@ -26,6 +26,7 @@ namespace GitHubAutoUpdateTest
             btnDownload.Visible = false;
             btnSkip.Visible = false;
             progressBar1.Visible = true;
+            lblProgress.Visible = true;
             Text = "Downloading...";
             label1.Text = "Downloading new version...";
             try
@@ -39,18 +40,18 @@ namespace GitHubAutoUpdateTest
                     client.ProgressChanged += (totalFileSize, totalBytesDownloaded, progressPercentage) => {
                         Console.WriteLine($"{progressPercentage}% ({totalBytesDownloaded}/{totalFileSize})");
                         progressBar1.Value = (int)(progressPercentage ?? 0);
+                        lblProgress.Text = $"{progressPercentage}%";
+                        if (progressPercentage >= 100)
+                        {
+                            MessageBox.Show("Download complete!");
+
+                            Process.Start(destinationFilePath);
+                            // Close the current application
+                            Process.GetCurrentProcess().Kill();
+                        }
                     };
 
                     await client.StartDownload();
-                }
-
-                if (progressBar1.Value > 99)
-                {
-                    MessageBox.Show("Download complete!");
-
-                    Process.Start(destinationFilePath);
-                    // Close the current application
-                    Process.GetCurrentProcess().Kill();
                 }
             }
             catch (Exception ex)
@@ -61,6 +62,7 @@ namespace GitHubAutoUpdateTest
                 btnDownload.Visible = true;
                 btnSkip.Visible = true;
                 progressBar1.Visible = false;
+                lblProgress.Visible = false;
                 Text = "Update Available";
                 label1.Text = "A new version is available";
             }
