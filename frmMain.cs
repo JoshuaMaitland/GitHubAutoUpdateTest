@@ -19,6 +19,9 @@ namespace GitHubAutoUpdateTest
 
         private void frmMain_Load(object sender, EventArgs e)
         {
+#if DEBUG
+            Text += " [Debug]";
+#endif
             lblCurrentVersion.Text += Application.ProductVersion;
             if (Application.ProductVersion != VersionChecker.GetNewVersionNumberFromGithubAPI())
             {

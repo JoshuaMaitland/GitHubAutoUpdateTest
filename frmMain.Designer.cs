@@ -59,8 +59,9 @@
             this.ClientSize = new System.Drawing.Size(444, 71);
             this.Controls.Add(this.lblCurrentVersion);
             this.Controls.Add(this.label1);
+            this.MaximizeBox = false;
             this.Name = "frmMain";
-            this.Text = "frmMain";
+            this.Text = "GitHub Auto Update Test";
             this.Load += new System.EventHandler(this.frmMain_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
