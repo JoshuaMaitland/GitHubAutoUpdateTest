@@ -32,7 +32,7 @@ namespace GitHubAutoUpdateTest
             label1.Text = "Downloading new version...";
             try
             {
-                var downloadFileUrl = "https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v1.0.0.0/GitHubAutoUpdateTest.exe";
+                var downloadFileUrl = "https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v" + VersionChecker.GetNewVersionNumberFromGithubAPI() + "/GitHubAutoUpdateTest.exe";
                 var destinationFilePath = Path.Combine(Path.GetTempPath(), "GitHubAutoUpdateTest.exe");
 
                 using (var client = new HttpClientDownloadWithProgress(downloadFileUrl, destinationFilePath))
