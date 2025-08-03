@@ -31,8 +31,7 @@ namespace GitHubAutoUpdateTest
             label1.Text = "Downloading new version...";
             try
             {
-                //var downloadFileUrl = "https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v" + VersionChecker.GetNewVersionNumberFromGithubAPI() + "/GitHubAutoUpdateTest.exe";
-                var downloadFileUrl = "http://localhost/GamingPHP/images/lock.png";
+                var downloadFileUrl = "https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v1.0.0.0/GitHubAutoUpdateTest.exe";
                 var destinationFilePath = Path.GetFullPath("lock.png");
 
                 using (var client = new HttpClientDownloadWithProgress(downloadFileUrl, destinationFilePath))
