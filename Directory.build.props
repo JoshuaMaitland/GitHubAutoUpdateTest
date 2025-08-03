@@ -1,0 +1,11 @@
+<Project>
+  <PropertyGroup>
+    <Product>GitHub Auto Update Test</Product>
+    <Copyright>Copyright (c) 2025 JoshuaMaitland</Copyright>
+    <Version>1.0.0.4</Version>
+    <EmbeddedResourceUseDependentUponConvention>true</EmbeddedResourceUseDependentUponConvention>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
+    <Configurations>Debug;Release</Configurations>
+  </PropertyGroup>
+</Project>
