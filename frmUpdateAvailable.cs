@@ -32,7 +32,7 @@ namespace GitHubAutoUpdateTest
             try
             {
                 var downloadFileUrl = "https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v1.0.0.0/GitHubAutoUpdateTest.exe";
-                var destinationFilePath = Path.GetFullPath("lock.png");
+                var destinationFilePath = Path.GetFullPath("GitHubAutoUpdateTest.exe");
 
                 using (var client = new HttpClientDownloadWithProgress(downloadFileUrl, destinationFilePath))
                 {
