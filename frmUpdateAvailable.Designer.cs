@@ -71,7 +71,7 @@
             // btnDownload
             // 
             this.btnDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnDownload.Location = new System.Drawing.Point(146, 126);
+            this.btnDownload.Location = new System.Drawing.Point(146, 101);
             this.btnDownload.Name = "btnDownload";
             this.btnDownload.Size = new System.Drawing.Size(75, 23);
             this.btnDownload.TabIndex = 3;
@@ -83,7 +83,7 @@
             // 
             this.btnSkip.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSkip.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnSkip.Location = new System.Drawing.Point(227, 126);
+            this.btnSkip.Location = new System.Drawing.Point(227, 101);
             this.btnSkip.Name = "btnSkip";
             this.btnSkip.Size = new System.Drawing.Size(75, 23);
             this.btnSkip.TabIndex = 4;
@@ -125,7 +125,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnSkip;
-            this.ClientSize = new System.Drawing.Size(314, 161);
+            this.ClientSize = new System.Drawing.Size(314, 136);
             this.Controls.Add(this.lblDownloaded);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.progressBar1);
@@ -136,7 +136,7 @@
             this.Controls.Add(this.label1);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(300, 200);
+            this.MinimumSize = new System.Drawing.Size(300, 175);
             this.Name = "frmUpdateAvailable";
             this.ShowInTaskbar = false;
             this.Text = "A new version is available";
