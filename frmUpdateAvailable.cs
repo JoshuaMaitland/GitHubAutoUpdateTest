@@ -27,12 +27,13 @@ namespace GitHubAutoUpdateTest
             btnSkip.Visible = false;
             progressBar1.Visible = true;
             lblProgress.Visible = true;
+            lblDownloaded.Visible = true;
             Text = "Downloading...";
             label1.Text = "Downloading new version...";
             try
             {
                 var downloadFileUrl = "https://github.com/JoshuaMaitland/GitHubAutoUpdateTest/releases/download/v1.0.0.0/GitHubAutoUpdateTest.exe";
-                var destinationFilePath = Path.GetFullPath("GitHubAutoUpdateTest.exe");
+                var destinationFilePath = Path.Combine(Path.GetTempPath(), "GitHubAutoUpdateTest.exe");
 
                 using (var client = new HttpClientDownloadWithProgress(downloadFileUrl, destinationFilePath))
                 {
@@ -40,6 +41,7 @@ namespace GitHubAutoUpdateTest
                         Console.WriteLine($"{progressPercentage}% ({totalBytesDownloaded}/{totalFileSize})");
                         progressBar1.Value = (int)(progressPercentage ?? 0);
                         lblProgress.Text = $"{progressPercentage}%";
+                        lblDownloaded.Text = $"Downloaded: {totalBytesDownloaded / 1024} KB / {totalFileSize / 1024} KB";
                         if (progressPercentage >= 100)
                         {
                             MessageBox.Show("Download complete!");
@@ -62,6 +64,7 @@ namespace GitHubAutoUpdateTest
                 btnSkip.Visible = true;
                 progressBar1.Visible = false;
                 lblProgress.Visible = false;
+                lblDownloaded.Visible = false;
                 Text = "Update Available";
                 label1.Text = "A new version is available";
             }

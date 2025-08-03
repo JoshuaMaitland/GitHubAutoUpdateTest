@@ -35,6 +35,7 @@
             this.btnSkip = new System.Windows.Forms.Button();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.lblProgress = new System.Windows.Forms.Label();
+            this.lblDownloaded = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -108,12 +109,24 @@
             this.lblProgress.Text = "0%";
             this.lblProgress.Visible = false;
             // 
+            // lblDownloaded
+            // 
+            this.lblDownloaded.AutoSize = true;
+            this.lblDownloaded.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDownloaded.Location = new System.Drawing.Point(12, 70);
+            this.lblDownloaded.Name = "lblDownloaded";
+            this.lblDownloaded.Size = new System.Drawing.Size(127, 24);
+            this.lblDownloaded.TabIndex = 7;
+            this.lblDownloaded.Text = "Downloaded: ";
+            this.lblDownloaded.Visible = false;
+            // 
             // frmUpdateAvailable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnSkip;
             this.ClientSize = new System.Drawing.Size(314, 161);
+            this.Controls.Add(this.lblDownloaded);
             this.Controls.Add(this.lblProgress);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.btnSkip);
@@ -142,6 +155,7 @@
         private System.Windows.Forms.Button btnSkip;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label lblProgress;
+        private System.Windows.Forms.Label lblDownloaded;
     }
 }
 
