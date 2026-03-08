@@ -26,6 +26,7 @@ namespace GitHubAutoUpdateTest
             btnDownload.Visible = false;
             btnSkip.Visible = false;
             progressBar1.Visible = true;
+            lblProgress.Visible = true;
             Text = "Downloading...";
             label1.Text = "Downloading new version...";
             try
@@ -35,6 +36,7 @@ namespace GitHubAutoUpdateTest
                 c.DownloadProgressChanged += (s, progressArgs) =>
                 {
                     progressBar1.Value = progressArgs.ProgressPercentage;
+                    lblProgress.Text = $"{progressArgs.ProgressPercentage}%";
                 };
 
                 var filePath = Path.Combine(Path.GetTempPath(), "GitHubAutoUpdateTest.exe");
